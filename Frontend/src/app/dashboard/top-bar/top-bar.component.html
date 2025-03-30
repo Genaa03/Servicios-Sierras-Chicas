@@ -1,0 +1,47 @@
+<header class="relative z-10 h-16 w-full items-center bg-white shadow md:h-20">
+  <div class="relative mx-auto flex h-full flex-col justify-center px-3 border-b-2 border-b-green-800 fondo">
+    <div class="relative flex w-full items-center pl-1 sm:ml-0 sm:pr-2">
+      <div class="relative left-0 flex w-3/4">
+        <div class="group relative flex h-full w-12 items-center">
+
+          <div class="example-button-container">
+            <button mat-mini-fab color="success"
+                    (click)="openSidebar()"
+                    aria-expanded="false"
+                    aria-label="Toggle sidenav" class="bg-green-800">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="relative w-3/4">
+        <!--ALGO PARA PONER EN EL MEDIO DE LA TOPBAR-->
+      </div>
+
+      <div class="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto sm:mr-0 overflow-visible">
+        <button mat-fab extended color="anuncios" class="h-60" *ngIf="esProfesionista()" routerLink="/suscripcion">
+          <mat-icon>attach_money</mat-icon>
+          Anuncios Premium
+        </button>
+        <div class="example-button-container pl-5">
+          <button mat-fab color="success" aria-label="Example icon button with a home icon"  [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu="matMenu">
+          <ng-container *ngIf="!logueado()">
+            <button mat-menu-item routerLink="/login">Iniciar sesión</button>
+            <button mat-menu-item routerLink="/register">Registrarse</button>
+          </ng-container>
+          <ng-container *ngIf="logueado()">
+            <button mat-menu-item routerLink="/datospersonales">Datos Personales</button>
+            <button mat-menu-item routerLink="/panelProfesionista" *ngIf="esProfesionista()">Panel Profesionista</button>
+            <button mat-menu-item routerLink="/turnos" *ngIf="esProfesionista()">Turnos</button>
+            <button mat-menu-item routerLink="/panelAdmin" *ngIf="esAdmin()">Panel Admin</button>
+            <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesion</button>
+          </ng-container>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</header>

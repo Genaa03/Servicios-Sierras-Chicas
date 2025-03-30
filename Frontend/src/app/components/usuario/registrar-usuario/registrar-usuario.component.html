@@ -1,0 +1,86 @@
+<div class="container d-flex justify-content-center align-items-center flex-column position-relative mt-24">
+  <div class="col-md-5 mt-5">
+    <form [formGroup]="formUsuario" class="p-5 shadow-2xl rounded bg-green-200 border-0">
+      <h2 class="text-center">Registro de Usuario</h2>
+      <hr class="p-1">
+
+      <div class="form-group mb-3">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput
+                 type="email"
+                 formControlName="email"
+                 placeholder="Correo electrónico"
+                 [ngClass]="{'is-invalid': email?.invalid && (email?.touched || email?.dirty)}">
+          <mat-error *ngIf="email?.getError('required') && (email?.touched || email?.dirty)">
+            Debe ingresar un correo electrónico
+          </mat-error>
+          <mat-error *ngIf="email?.getError('email') && (email?.touched || email?.dirty)">
+            Debe ingresar un correo electrónico válido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group mb-3">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput
+                 [type]="hidePassword ? 'password' : 'text'"
+                 formControlName="password"
+                 placeholder="Contraseña"
+                 [ngClass]="{'is-invalid': password?.invalid && (password?.touched || password?.dirty)}">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password?.getError('required') && (password?.touched || password?.dirty)">
+            Debe ingresar una contraseña
+          </mat-error>
+          <mat-error *ngIf="password?.getError('minlength') && (password?.touched || password?.dirty)">
+            La contraseña debe tener mínimo 8 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group mb-3">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Confirma contraseña</mat-label>
+          <input matInput
+                 [type]="hideConfirmPassword ? 'password' : 'text'"
+                 formControlName="confirmpassword"
+                 placeholder="Confirma contraseña"
+                 [ngClass]="{'is-invalid': confirmpassword?.invalid && (confirmpassword?.touched || confirmpassword?.dirty)}">
+          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
+            <mat-icon>{{ hideConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="confirmpassword?.getError('required') && (confirmpassword?.touched || confirmpassword?.dirty)">
+            Debe ingresar una contraseña
+          </mat-error>
+          <mat-error *ngIf="(confirmpassword?.touched || confirmpassword?.dirty) && confirmpassword?.getError('mismaPassword')">
+            La contraseña debe ser idéntica a la ingresada
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group mb-3">
+        <mat-radio-group formControlName="tipoUsuario" class="w-full" required>
+          <mat-label class="text-start"><strong>Seleccione un rol:</strong></mat-label>
+          <mat-radio-button value="1" class="mx-10">Cliente</mat-radio-button>
+          <mat-radio-button value="2">Profesionista</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="form-group mb-3">
+        <mat-checkbox formControlName="terms" (click)="openTermsDialog()">
+          Acepto los <a href="javascript:void(0)" class="text-black no-underline hover:no-underline" (click)="openTermsDialog()">Términos y Condiciones</a>
+        </mat-checkbox>
+        <mat-error *ngIf="terms?.invalid && (terms?.touched || terms?.dirty)">
+          Debe aceptar los términos y condiciones
+        </mat-error>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button mat-flat-button color="primary" [disabled]="formUsuario.invalid" (click)="registrarUsuario()">Registrarte</button>
+      </div>
+    </form>
+  </div>
+</div>

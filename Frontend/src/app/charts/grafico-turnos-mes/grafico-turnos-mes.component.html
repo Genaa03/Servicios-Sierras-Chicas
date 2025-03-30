@@ -1,0 +1,22 @@
+<mat-form-field class="d-flex year-select">
+  <mat-label>Año</mat-label>
+  <mat-select (selectionChange)="onYearChange($event.value)">
+    <mat-option *ngFor="let year of availableYears" [value]="year">{{ year }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<div>
+  <apx-chart
+    #graficoTurnos
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [plotOptions]="chartOptions.plotOptions!"
+    [yaxis]="chartOptions.yaxis!"
+    [legend]="chartOptions.legend!"
+    [fill]="chartOptions.fill!"
+    [stroke]="chartOptions.stroke!"
+    [tooltip]="chartOptions.tooltip!"
+    [xaxis]="chartOptions.xaxis!"
+    [title]="chartOptions.title!"
+  ></apx-chart>
+</div>

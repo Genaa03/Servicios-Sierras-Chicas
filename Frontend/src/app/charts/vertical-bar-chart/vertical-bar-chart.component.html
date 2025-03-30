@@ -1,0 +1,19 @@
+<mat-form-field class="d-flex year-select">
+  <mat-label>Año</mat-label>
+  <mat-select [(value)]="selectedYear" (selectionChange)="onYearChange($event)">
+    <mat-option *ngFor="let year of availableYears" [value]="year">{{ year }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<div id="chart">
+  <apx-chart
+    #chartVert
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [xaxis]="chartOptions.xaxis!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [grid]="chartOptions.grid!"
+    [stroke]="chartOptions.stroke!"
+    [title]="chartOptions.title!"
+    [yaxis]="chartOptions.yaxis!"
+  ></apx-chart>
+</div>

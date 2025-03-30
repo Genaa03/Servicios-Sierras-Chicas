@@ -1,0 +1,125 @@
+<div class="container-xl mt-5">
+  <form [formGroup]="personaForm" class="p-5 shadow-2xl rounded bg-green-200 border-0">
+    <h2 class="text-center">Datos Personales</h2>
+    <hr class="my-1">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" placeholder="Apellido">
+        <mat-error *ngIf="apellido?.invalid && (apellido?.touched || apellido?.dirty)">
+          <span *ngIf="apellido?.getError('required')">El apellido es obligatorio</span>
+          <span *ngIf="apellido?.getError('maxlength')">Máximo 25 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre">
+        <mat-error *ngIf="nombre?.invalid && (nombre?.touched || nombre?.dirty)">
+          <span *ngIf="nombre?.getError('required')">El nombre es obligatorio</span>
+          <span *ngIf="nombre?.getError('maxlength')">Máximo 25 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Provincia</mat-label>
+        <mat-select formControlName="provincia" placeholder="Provincia">
+          <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">{{ provincia.descripcion }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="provincia?.invalid && (provincia?.touched || provincia?.dirty)">La provincia es obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Ciudad</mat-label>
+        <mat-select formControlName="ciudad" placeholder="Ciudad">
+          <mat-option *ngFor="let c of ciudades" [value]="c.id">{{ c.descripcion }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="ciudad?.invalid && (ciudad?.touched || ciudad?.dirty)">La ciudad es obligatoria</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput formControlName="fechaNacimiento" type="date">
+        <mat-error *ngIf="fechaNacimiento?.invalid && (fechaNacimiento?.touched || fechaNacimiento?.dirty)">La fecha de nacimiento es obligatoria</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Tipo de DNI</mat-label>
+        <mat-select formControlName="tipoDNI" placeholder="Tipo de DNI">
+          <mat-option *ngFor="let tipo of tiposDNI" [value]="tipo.id">{{ tipo.descripcion }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="tipoDNI?.invalid && (tipoDNI?.touched || tipoDNI?.dirty)">El tipo de DNI es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Calle</mat-label>
+        <input matInput formControlName="calle" placeholder="Calle">
+        <mat-error *ngIf="calle?.invalid && (calle?.touched || calle?.dirty)">
+          <span *ngIf="calle?.getError('required')">La calle es obligatoria</span>
+          <span *ngIf="calle?.getError('maxlength')">Máximo 50 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Número de Documento</mat-label>
+        <input matInput formControlName="nroDocumento" placeholder="Número de Documento">
+        <mat-error *ngIf="nroDocumento?.invalid && (nroDocumento?.touched || nroDocumento?.dirty)">
+          <span *ngIf="nroDocumento?.getError('required')">El número de documento es obligatorio</span>
+          <span *ngIf="nroDocumento?.getError('maxlength')">Máximo 10 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Altura</mat-label>
+        <input matInput formControlName="altura" placeholder="Altura">
+        <mat-error *ngIf="altura?.invalid && (altura?.touched || altura?.dirty)">
+          <span *ngIf="altura?.getError('required')">La altura es obligatoria</span>
+          <span *ngIf="altura?.getError('maxlength')">Máximo 10 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="w-full flex">
+        <mat-form-field class="w-full">
+          <mat-label>Teléfono 1 (sin 0 y sin 15)</mat-label>
+          <input matInput formControlName="telefono1" placeholder="Teléfono 1">
+          <mat-error *ngIf="telefono1?.invalid && (telefono1?.touched || telefono1?.dirty)">
+            <span *ngIf="telefono1?.getError('required')">El teléfono 1 es obligatorio</span>
+            <span *ngIf="telefono1?.getError('maxlength')">Máximo 12 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <mat-form-field class="w-full">
+        <mat-label>Teléfono 2</mat-label>
+        <input matInput formControlName="telefono2" placeholder="Teléfono 2">
+        <mat-error *ngIf="telefono2?.invalid && (telefono2?.touched || telefono2?.dirty)">
+          <span *ngIf="telefono2?.getError('maxlength')">Máximo 12 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Teléfono Fijo</mat-label>
+        <input matInput formControlName="telefonofijo" placeholder="Teléfono Fijo">
+        <mat-error *ngIf="telefonofijo?.invalid && (telefonofijo?.touched || telefonofijo?.dirty)">
+          <span *ngIf="telefonofijo?.getError('maxlength')">Máximo 12 caracteres</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex justify-center">
+      <button mat-raised-button color="primary" class="mx-1" (click)="habilitar()" *ngIf="!editModeDatos">Modificar</button>
+      <button mat-raised-button color="warn" class="mx-1" (click)="cancelEdit()" *ngIf="editModeDatos">Cancelar</button>
+      <button mat-raised-button color="primary" class="mx-1" (click)="actualizarDatos()" *ngIf="editModeDatos" [disabled]="personaForm.invalid || personaForm.pristine">Guardar</button>
+    </div>
+  </form>
+</div>
